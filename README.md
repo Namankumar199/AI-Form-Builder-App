@@ -3,8 +3,8 @@
 <!-- Add your project images here -->
 <p align="center">
   <img src="Screenshot 2024-09-12 193947.png" alt="Project Banner" width="100%" style="max-width: 1200px;" />
-  <img src="" alt="Feature 1" width="30%" style="margin: 10px;" />
-  <img src="" alt="Feature 2" width="30%" style="margin: 10px;" />
+  <img src="Screenshot 2024-09-12 194009.png" alt="Feature 1" width="30%" style="margin: 10px;" />
+  <img src="Screenshot 2024-09-12 194020.png" alt="Feature 2" width="30%" style="margin: 10px;" />
   </p>
 
 Welcome to the **AI Form Builder App** project! This README will guide you through the setup and deployment of your Next.js application.
