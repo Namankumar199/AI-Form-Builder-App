@@ -69,7 +69,3 @@ To run tests, use:
 ## Contributing
 
 We welcome contributions to this project! Please follow the <a href="CONTRIBUTING.md" target="_blank">contributing guidelines</a> and ensure all tests pass before submitting a pull request.
-
-## License
-
-This project is licensed under the MIT License - see the <a href="LICENSE" target="_blank">LICENSE</a> file for details.
