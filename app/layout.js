@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "./_components/Header";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/components/ui/sonner"
+import ErrorBoundary from "@/components/ui/error-boundary";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,14 +18,18 @@ export default function RootLayout({ children }) {
     <ClerkProvider>
       <html lang="en" data-theme="">
         <body className={inter.className} >
-          <Header />
-          {children}
+          <ErrorBoundary>
+            <Header />
+            {children}
+          </ErrorBoundary>
 
           <Toaster
-            position="bottom-right" // set position to top center
+            position="bottom-right"
             toastOptions={{
               style: {
-                backgroundColor: '#ffeb3b', // change this to your desired color
+                background: 'linear-gradient(to right, #10b981, #3b82f6)',
+                color: 'white',
+                border: '1px solid #14b8a6',
               },
             }}
           />

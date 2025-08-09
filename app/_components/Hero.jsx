@@ -10,18 +10,17 @@ function Hero() {
 
     <section className="w-full flex flex-col">
       {/* Hero Section */}
-      <div style={{ backgroundColor: '#fff' }}
-        className='flex justify-center items-center rounded-lg min-h-screen  opacity-4 p-2 relative'>
+      <div className='flex justify-center items-center rounded-lg min-h-screen p-2 relative bg-gradient-to-br from-blue-50 via-teal-50 to-green-50'>
         <div
-          className="h-fit md:w-fit rounded-3xl py-10 md:p-20 shadow-md mx-4 
-           hover:shadow-sm hover:shadow-blue-300 transition-all 
-           absolute top-12 left-50 ">
+          className="h-fit md:w-fit rounded-3xl py-10 md:p-20 shadow-xl mx-4 
+           hover:shadow-2xl hover:shadow-teal-300/50 transition-all duration-500 transform hover:scale-105
+           absolute top-12 left-50 bg-white/80 backdrop-blur-sm animate-fade-in">
 
           <div className="text-center p-5 md:p-10 ">
             <div >
-              <h1 className="text-3xl md:text-6xl font-extrabold text-gray-600 sm:text-5xl tracking-wide flex flex-col md:flex-col">
+              <h1 className="text-3xl md:text-6xl font-extrabold bg-gradient-to-r from-blue-600 via-teal-600 to-green-600 bg-clip-text text-transparent sm:text-5xl tracking-wide flex flex-col md:flex-col animate-fade-in">
                 Create Your Form
-                <strong className="font-extrabold text-blue-800 sm:block tracking-normal"> In Seconds Not in Hours </strong>
+                <strong className="font-extrabold bg-gradient-to-r from-green-700 to-blue-700 bg-clip-text text-transparent sm:block tracking-normal animate-pulse-slow"> In Seconds Not in Hours </strong>
               </h1>
 
               <p className="mt-4 sm:text-xl/relaxed  py-5" style={{ color: 'gray', maxWidth: '500px', minWidth: '200px', margin: 'auto' }}>
@@ -29,16 +28,15 @@ function Hero() {
               </p>
             </div>
 
-            <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <div className="mt-8 flex flex-wrap justify-center gap-4 animate-fade-in">
               <a
-                className="block w-full rounded px-12 py-3 text-md font-medium shadow text-gray-100 focus:outline-none focus:ring active:bg-transparent sm:w-auto bg-blue-500"
+                className="block w-full rounded-xl px-12 py-3 text-md font-medium shadow-lg text-white focus:outline-none focus:ring sm:w-auto bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 transform hover:scale-105 transition-all duration-300 hover:shadow-xl"
                 href='#'
               >
                 + Create AI Form
-
               </a>
               <a
-                className="block w-full rounded px-12 py-3 text-md font-medium  border border-blue-900 shadow hover:text-gray-700 focus:outline-none focus:ring active:text-purple-700 sm:w-auto"
+                className="block w-full rounded-xl px-12 py-3 text-md font-medium border-2 border-green-500 shadow-lg hover:bg-gradient-to-r hover:from-green-50 hover:to-blue-50 focus:outline-none focus:ring sm:w-auto transform hover:scale-105 transition-all duration-300 bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent hover:text-gray-700"
                 href="#"
               >
                 Learn More
@@ -52,28 +50,26 @@ function Hero() {
 
       {/* Card section */}
       <div
-        style={{ backgroundColor: '#fff' }}
-        className='h-fit w-screen flex flex-col items-center justify-center p-10 gap-9 relative'>
+        className='h-fit w-screen flex flex-col items-center justify-center p-10 gap-9 relative bg-gradient-to-b from-green-50 to-blue-50'>
         {/* stars */}
         <div
           style={{ clipPath: 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)' }}
-          className='w-10 h-10 bg-slate-400 absolute top-5 left-5 z-0'>
+          className='w-10 h-10 bg-gradient-to-r from-green-400 to-blue-400 absolute top-5 left-5 z-0 animate-pulse'>
         </div>
 
         <div
           style={{ clipPath: 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)' }}
-          className='w-10 h-10 bg-slate-400 absolute top-12 left-5 z-0'>
+          className='w-10 h-10 bg-gradient-to-r from-blue-400 to-green-400 absolute top-12 left-5 z-0 animate-pulse'>
         </div>
         {/* stares end */}
 
-        <div className='p-10 flex flex-col items-center justify-center z-10' >
-          <h2 className='text-6xl text-center mt-10 text font-extrabold'> How it Works</h2>
-          <h3 style={{ width: '350px' }} className='text-gray-400  mt-5 '>
-            <span className='text-blue-400 text-lg'>
+        <div className='p-10 flex flex-col items-center justify-center z-10 animate-fade-in' >
+          <h2 className='text-6xl text-center mt-10 font-extrabold bg-gradient-to-r from-blue-600 via-teal-600 to-green-600 bg-clip-text text-transparent'> How it Works</h2>
+          <h3 style={{ width: '350px' }} className='text-gray-600 mt-5 text-center'>
+            <span className='bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent text-lg font-semibold'>
               AiForm Builder
             </span>
             &nbsp;lets you create free, conversational online forms. No coding needed — simply type your questions as naturally as having a conversation.
-
           </h3>
         </div>
 
@@ -81,9 +77,8 @@ function Hero() {
         <div className='w-full flex flex-col gap-12 justify-center items-center lg:flex-row'>
 
           <div style={{ maxWidth: '400px', minWidth: '200px', maxHeight: '400px', minHeight: '240px' }}
-            className='border-2 border-green-900  py-5 px-8 rounded-lg   shadow-xl  bg-blend-darken  
-          transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-120 hover:bg-blue-500 hover:text-white duration-300     
-         '>
+            className='border-2 border-green-400 py-5 px-8 rounded-xl shadow-xl bg-white/80 backdrop-blur-sm
+          transition-all duration-500 hover:-translate-y-2 hover:scale-110 hover:bg-gradient-to-r hover:from-green-500 hover:to-blue-500 hover:text-white hover:shadow-2xl animate-fade-in'>
             <Sparkles size={40} />
             <p className='font-extrabold text-lg mt-4'>Write prompt for your form </p>
             <p className='mt-1'>
@@ -92,9 +87,8 @@ function Hero() {
           </div>
 
 
-          <div style={{ maxWidth: '400px', minWidth: '200px', maxHeight: '400px', minHeight: '240px' }} className='border-2 border-green-900  py-5 px-8 rounded-lg shadow-xl bg-blend-darken 
-          transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-120 hover:bg-blue-500 hover:text-white duration-300 
-          '>
+          <div style={{ maxWidth: '400px', minWidth: '200px', maxHeight: '400px', minHeight: '240px' }} className='border-2 border-blue-400 py-5 px-8 rounded-xl shadow-xl bg-white/80 backdrop-blur-sm
+          transition-all duration-500 hover:-translate-y-2 hover:scale-110 hover:bg-gradient-to-r hover:from-blue-500 hover:to-green-500 hover:text-white hover:shadow-2xl animate-fade-in'>
             <Edit size={40} />
             <p className='font-extrabold text-lg mt-4'>Edit your form </p>
             <p className='mt-1'>
@@ -102,9 +96,8 @@ function Hero() {
             </p>
           </div>
 
-          <div style={{ maxWidth: '400px', minWidth: '200px', maxHeight: '400px', minHeight: '240px' }} className='border-2 border-green-900  py-5 px-8 rounded-lg   shadow-xl  bg-blend-darken 
-          transition ease-in-out delay-40 hover:-translate-y-1 hover:scale-120 hover:bg-blue-500 hover:text-white duration-600 
-          '>
+          <div style={{ maxWidth: '400px', minWidth: '200px', maxHeight: '400px', minHeight: '240px' }} className='border-2 border-teal-400 py-5 px-8 rounded-xl shadow-xl bg-white/80 backdrop-blur-sm
+          transition-all duration-700 hover:-translate-y-2 hover:scale-110 hover:bg-gradient-to-r hover:from-teal-500 hover:to-green-500 hover:text-white hover:shadow-2xl animate-fade-in'>
             <Share2 size={40} />
             <p className='font-extrabold text-lg mt-4'> Share & start Accepting Responses </p>
             <p className='mt-1'>
@@ -114,7 +107,7 @@ function Hero() {
 
 
         </div>
-        <div className=''><Button className='bg-blue-500 hover:bg-blue-400'> Get Started Today </Button></div>
+        <div className='animate-fade-in'><Button className='bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl rounded-xl px-8 py-3'> Get Started Today </Button></div>
       </div>
       <Footer />
       

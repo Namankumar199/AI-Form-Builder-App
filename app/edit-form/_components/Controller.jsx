@@ -20,7 +20,7 @@ function Controller({ selectedTheme, selectedBackground }) {
     return (
         <div>
             {/* Theme Selection controller */}
-            <h2 className='my-1'>Select Themes</h2>
+            <h2 className='my-1 font-semibold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent'>Select Themes</h2>
             <Select onValueChange={(value) => selectedTheme(value)}>
                 <SelectTrigger className="w-full">
                     <SelectValue placeholder="Theme" />
@@ -61,20 +61,20 @@ function Controller({ selectedTheme, selectedBackground }) {
             </Select>
 
             {/* Background Selection Controller */}
-            <h2 className='mt-8 my-1'>Background</h2>
+            <h2 className='mt-8 my-1 font-semibold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent'>Background</h2>
             <div className='grid grid-cols-3 gap-5'>
                 {GradientBg.map((bg, index) => index < showMore && (
                     <div
                         key={index}
                         onClick={() => selectedBackground(bg.gradient)}
-                        className='w-full h-[70px] rounded hover:border-black hover:border-2 flex items-center justify-center cursor-pointer'
+                        className='w-full h-[70px] rounded-lg hover:border-teal-400 hover:border-2 flex items-center justify-center cursor-pointer transform hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg'
                         style={{ background: bg.gradient }}>
                         {index == 0 && 'None'}
                     </div>
                 ))}
             </div>
             <Button variant="ghost" size="sm"
-                className="w-full my-3 hover:bg-slate-500 hover:text-white"
+                className="w-full my-3 hover:bg-gradient-to-r hover:from-green-500 hover:to-blue-500 hover:text-white transform hover:scale-105 transition-all duration-300"
                 onClick={() => setShowMore(showMore > 6 ? 6 : 20)}>
                 {showMore > 6 ? 'Show Less' : 'Show More'}
             </Button>

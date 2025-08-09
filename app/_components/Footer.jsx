@@ -3,25 +3,25 @@ import React from 'react'
 function Footer() {
     return (
 
-        <div class="w-full min-h-screen flex items-center justify-center bg-blue-500">
-            <div class="md:w-2/3 w-full px-4 text-white flex flex-col">
-                <div class="w-full text-7xl font-bold">
-                    <h1 class="w-full md:w-2/3 text-blue-100">How can we help you. get
+        <div className="w-full min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-600 via-teal-600 to-green-600 animate-fade-in">
+            <div className="md:w-2/3 w-full px-4 text-white flex flex-col">
+                <div className="w-full text-7xl font-bold animate-fade-in">
+                    <h1 className="w-full md:w-2/3 text-white drop-shadow-lg">How can we help you. get
                         in touch</h1>
                 </div>
-                <div class="flex mt-8 flex-col md:flex-row md:justify-between">
-                    <p class="w-full md:w-2/3 text-gray-400">To ensure that all Wikipedia content is verifiable, anyone may question an uncited claim. If your work has been tagged</p>
-                    <div class="w-44 pt-6 md:pt-0">
-                        <a class="bg-blue-600 justify-center text-center rounded-lg shadow px-10 py-3 flex items-center">Contact US</a>
+                <div className="flex mt-8 flex-col md:flex-row md:justify-between animate-fade-in">
+                    <p className="w-full md:w-2/3 text-gray-100">To ensure that all Wikipedia content is verifiable, anyone may question an uncited claim. If your work has been tagged</p>
+                    <div className="w-44 pt-6 md:pt-0">
+                        <a className="bg-white/20 backdrop-blur-sm justify-center text-center rounded-lg shadow-lg px-10 py-3 flex items-center hover:bg-white/30 transform hover:scale-105 transition-all duration-300 cursor-pointer">Contact US</a>
                     </div>
                 </div>
-                <div class="flex flex-col">
-                    <div class="flex mt-24 mb-12 flex-row justify-between">
-                                             <a class="hidden md:block cursor-pointer text-gray-600 hover:text-white uppercase">About</a>
-                        <a class="hidden md:block cursor-pointer text-gray-600 hover:text-white uppercase">Services</a>
-                        <a class="hidden md:block cursor-pointer text-gray-600 hover:text-white uppercase">Why us</a>
-                        <a class="hidden md:block cursor-pointer text-gray-600 hover:text-white uppercase">Contact</a>
-                        <div class="flex flex-row space-x-8 items-center justify-between">
+                <div className="flex flex-col">
+                    <div className="flex mt-24 mb-12 flex-row justify-between animate-fade-in">
+                        <a className="hidden md:block cursor-pointer text-gray-200 hover:text-white uppercase transform hover:scale-105 transition-all duration-300">About</a>
+                        <a className="hidden md:block cursor-pointer text-gray-200 hover:text-white uppercase transform hover:scale-105 transition-all duration-300">Services</a>
+                        <a className="hidden md:block cursor-pointer text-gray-200 hover:text-white uppercase transform hover:scale-105 transition-all duration-300">Why us</a>
+                        <a className="hidden md:block cursor-pointer text-gray-200 hover:text-white uppercase transform hover:scale-105 transition-all duration-300">Contact</a>
+                        <div className="flex flex-row space-x-8 items-center justify-between">
                             <a>
                                 <svg width="6" height="12" viewBox="0 0 6 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M3.89782 12V6.53514H5.67481L5.93895 4.39547H3.89782V3.03259C3.89782 2.41516 4.06363 1.99243 4.91774 1.99243H6V0.0847928C5.47342 0.0262443 4.94412 -0.00202566 4.41453 0.000112795C2.84383 0.000112795 1.76542 0.994936 1.76542 2.82122V4.39147H0V6.53114H1.76928V12H3.89782Z" fill="white" />
@@ -41,8 +41,8 @@ function Footer() {
                             </a>
                         </div>
                     </div>
-                    <hr class="border-gray-600" />
-                    <p class="w-full text-center my-12 text-gray-400">Copyright © 2024 Naman Kumar</p>
+                    <hr className="border-gray-300" />
+                    <p className="w-full text-center my-12 text-gray-100">Copyright © 2024 Naman Kumar</p>
                 </div>
             </div>
         </div>

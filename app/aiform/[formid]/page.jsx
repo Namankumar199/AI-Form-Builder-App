@@ -22,7 +22,7 @@ function LiveAiForm({ params }) {
         console.log(result);
     }
     return (
-        <div className='p-10 flex justify-center items-center h-screen'
+        <div className='p-10 flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 via-teal-50 to-green-50'
             style={{ backgroundImage: record?.background }}>
 
             {record && <FormUi

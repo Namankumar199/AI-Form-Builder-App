@@ -85,16 +85,16 @@ function EditForm({ params }) {
     }
 
     return (
-        <div className='p-10'>
+        <div className='p-10 bg-gradient-to-br from-blue-50/30 via-teal-50/30 to-green-50/30 min-h-screen'>
             <div className='flex justify-between items-center'>
-                <h2 className='flex gap-2 items-center my-5 cursor-pointer hover:font-bold'
+                <h2 className='flex gap-2 items-center my-5 cursor-pointer hover:font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent transform hover:scale-105 transition-all duration-300'
                     onClick={() => router.back()}>
                     <ArrowLeft /> Back
                 </h2>
                 <div className='flex gap-2 '>
              
                     <Link href={'/aiform/' + record?.id} target='_blank'>
-                        <Button className='flex gap-2'> <SquareArrowOutUpRight className='h-5 w-5' /> Live Preview</Button>
+                        <Button className='flex gap-2 bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 transform hover:scale-105 transition-all duration-300'> <SquareArrowOutUpRight className='h-5 w-5' /> Live Preview</Button>
                     </Link>
 
                     <RWebShare
@@ -105,13 +105,13 @@ function EditForm({ params }) {
                         }}
                         onClick={() => console.log("shared successfully!")}
                      >
-                        <Button className='flex gap-2 bg-blue-700'> <Share className='h-5 w-5' /> Share</Button>
+                        <Button className='flex gap-2 bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600 transform hover:scale-105 transition-all duration-300'> <Share className='h-5 w-5' /> Share</Button>
                     </RWebShare>
                 </div>
             </div>
             
             <div className='grid grid-cols-1 md:grid-cols-3 gap-5'>
-                <div className='p-5 border rounded-lg shadow-md'>
+                <div className='p-5 border-2 border-teal-200 rounded-xl shadow-lg bg-white/80 backdrop-blur-sm animate-fade-in'>
                     <Controller
                         selectedTheme={(value) => {
                             updateControllerFields(value, 'theme')
@@ -124,12 +124,13 @@ function EditForm({ params }) {
                     />
                 </div>
 
-                <div className='md:col-span-2 border rounded-lg p-5 flex justify-center'
+                <div className='md:col-span-2 border-2 border-teal-200 rounded-xl p-5 flex justify-center shadow-lg animate-fade-in'
                     style={{ backgroundImage: selectedBackground }}>
                     <FormUi jsonForm={jsonForm}
                         selectedTheme={selectedTheme}
                         onFieldUpdate={onFieldUpdated}
                         deleteField={(index) => deleteField(index)}
+                        allFields={jsonForm?.fields || []}
                     />
                 </div>
             </div>

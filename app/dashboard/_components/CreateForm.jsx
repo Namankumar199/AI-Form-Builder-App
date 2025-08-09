@@ -14,9 +14,13 @@ import { useUser } from '@clerk/nextjs';
 import { JsonForms } from '@/configs/schema';
 import { db } from '@/configs';
 import moment from 'moment';
-import { Loader2 } from 'lucide-react';
+import { Loader2, Sparkles } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import { validateFormInput, validateFormData } from '@/lib/validation';
+import { checkRateLimit } from '@/lib/rateLimit';
+import { LoadingSpinner } from '@/components/ui/loading';
+import TemplateSelector from './TemplateSelector';
 
 
 // Prompt message to be appended to user input for form creation
@@ -72,8 +76,9 @@ Ensure there are no missing commas or extra commas or no extra space.
 
 function CreateForm() {
     const [openDialog, setOpenDialog] = useState(false);
+    const [showTemplates, setShowTemplates] = useState(true);
     const [userInput, setUserInput] = useState('');
-    const [loading, setLoading] = useState(); // State for loading indicator
+    const [loading, setLoading] = useState();
     const { user } = useUser();
     const route = useRouter();
 
@@ -81,10 +86,19 @@ function CreateForm() {
 
     const onCreateForm = async () => {
         try {
-            setLoading(true); // Set loading to true when creating form
+            setLoading(true);
+            
+            // Validate input
+            const sanitizedInput = validateFormInput(userInput);
+            if (sanitizedInput.length < 10) {
+                throw new Error('Please provide a more detailed description (at least 10 characters)');
+            }
+            
+            // Check rate limit
+            checkRateLimit(user?.primaryEmailAddress?.emailAddress);
 
             // Sending user input and prompt to AI chat session
-            const result = await AiChatSession.sendMessage("Description: " + userInput + PROMPT);
+            const result = await AiChatSession.sendMessage("Description: " + sanitizedInput + PROMPT);
             const rawData = result.response.text();
 
             if (!rawData) {
@@ -101,7 +115,12 @@ function CreateForm() {
 
             // Step 2: Extract the JSON substring
             const jsonString = rawData.slice(jsonStart, jsonEnd);
-            console.log(jsonString); // Logging response text from AI session
+            
+            // Validate the generated form data
+            const parsedForm = JSON.parse(jsonString);
+            validateFormData(parsedForm);
+            
+            console.log(jsonString);
 
             // Insert into the database
             const resp = await db.insert(JsonForms).values({
@@ -119,11 +138,34 @@ function CreateForm() {
 
         } catch (error) {
             console.error('Error creating form:', error);
-            setOpenDialog(false);
-            setLoading(false);
-            toast('error occured.!')
+            const errorMessage = error.message || 'An unexpected error occurred';
+            toast.error(errorMessage);
         } finally {
-            setOpenDialog(false);
+            setLoading(false);
+        }
+    };
+
+    const handleTemplateSelect = async (template) => {
+        try {
+            setLoading(true);
+            
+            // Insert template directly into database
+            const resp = await db.insert(JsonForms).values({
+                jsonform: JSON.stringify(template.template),
+                createdBy: user?.primaryEmailAddress?.emailAddress,
+                createdAt: moment().format('HH:mm:ss DD/MM/yyyy')
+            }).returning({ id: JsonForms.id });
+
+            if (resp[0]?.id) {
+                toast.success('Form created from template!');
+                route.push('/edit-form/' + resp[0].id);
+                setOpenDialog(false);
+                setShowTemplates(true);
+            }
+        } catch (error) {
+            console.error('Error creating form from template:', error);
+            toast.error('Failed to create form from template');
+        } finally {
             setLoading(false);
         }
     };
@@ -131,29 +173,56 @@ function CreateForm() {
     return (
         <div>
             {/* Button to open the create form dialog */}
-            <Button className='bg-blue-500' onClick={() => setOpenDialog(true)}>+ Create Form </Button>
+            <Button className='bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl' onClick={() => { setOpenDialog(true); setShowTemplates(true); }}>+ Create Form </Button>
             {/* Dialog for creating new form */}
             {/* onClose={() => setOpenDialog(false)} */}
             <Dialog open={openDialog}>
-                <DialogContent>
+                <DialogContent className='bg-gradient-to-br from-blue-50 to-green-50 border-2 border-teal-200 max-w-4xl max-h-[80vh] overflow-y-auto'>
                     <DialogHeader>
-                        <DialogTitle>Create new form</DialogTitle>
+                        <DialogTitle className='bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent text-xl font-bold'>
+                            {showTemplates ? 'Create New Form' : 'Describe Your Form'}
+                        </DialogTitle>
                         <DialogDescription>
-                            {/* Textarea for user to input form description */}
-                            <Textarea
-                                className="my-2"
-                                placeholder="Write description of your form.."
-                                onChange={(event) => setUserInput(event.target.value)}
-                            />
-                            <div className='flex gap-3 items-end justify-end'>
-                                {/* Button to cancel form creation */}
-                                <Button variant="destructive" onClick={() => setOpenDialog(false)}>Cancel</Button>
-                                {/* Button to create form, disabled when loading */}
-                                <Button onClick={() => onCreateForm()} disabled={loading}>
-                                    {/* Loader icon from lucid-icons */}
-                                    {loading ? <Loader2 className='animate-spin' /> : 'Create'}
-                                </Button>
-                            </div>
+                            {showTemplates ? (
+                                <TemplateSelector 
+                                    onSelectTemplate={handleTemplateSelect}
+                                    onCreateFromScratch={() => setShowTemplates(false)}
+                                />
+                            ) : (
+                                <div>
+                                    {/* Textarea for user to input form description */}
+                                    <Textarea
+                                        className="my-2 border-teal-200 focus:border-teal-400"
+                                        placeholder="Describe your form in detail (e.g., 'Create a contact form with name, email, phone, and message fields')..."
+                                        onChange={(event) => setUserInput(event.target.value)}
+                                        maxLength={5000}
+                                    />
+                                    <div className="text-sm text-gray-500 mb-2">
+                                        {userInput.length}/5000 characters
+                                    </div>
+                                    <div className='flex gap-3 items-end justify-end'>
+                                        <Button variant="outline" onClick={() => setShowTemplates(true)}>Back to Templates</Button>
+                                        <Button variant="destructive" className='hover:scale-105 transition-all duration-200' onClick={() => { setOpenDialog(false); setShowTemplates(true); setUserInput(''); }}>Cancel</Button>
+                                        <Button 
+                                            className='bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 transform hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed' 
+                                            onClick={() => onCreateForm()} 
+                                            disabled={loading || !userInput.trim() || userInput.length < 10}
+                                        >
+                                            {loading ? (
+                                                <>
+                                                    <LoadingSpinner size="sm" className="mr-2" />
+                                                    Creating...
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <Sparkles className="mr-2 h-4 w-4" />
+                                                    Create AI Form
+                                                </>
+                                            )}
+                                        </Button>
+                                    </div>
+                                </div>
+                            )}
                         </DialogDescription>
                     </DialogHeader>
                 </DialogContent>
